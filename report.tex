@@ -1,4 +1,4 @@
-% !TXS template
+﻿% !TXS template
 \documentclass[italian]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -140,12 +140,12 @@
 	\end{equation}
 	con $a = \sqrt{1-\sqrt{\bar{E}}}, E = \bar{E}V_0$, $E$ è l'energia della particella. Per stimare $P(\bar{t},\bar{E}, \lambda)$ modellizziamo la particella come un sistema stocastico a due stati con una probabilità su unità di tempo $2\pi\omega_d p$ di cambiare stato:
 	\begin{equation}
-		P_{WKB}(t, \bar{E}, \lambda) = \frac{1}{2} \left(1-e^{-4\pi\omega_d p_{WKB} t}\right)
+		P_{WKB}(t, \bar{E}, \lambda) = \frac{1}{2} e^{-4\pi\omega_d p_{WKB} t}
 	\end{equation}
 	Mediando infine sui livelli energetici:
 	\begin{equation}
 		P_{WKB}(t, \bar{\beta}, \lambda) = \frac{1}{Z} \sum_{n=0}^{\infty} P_{WKB} e^{-\bar{\beta}\bar{E}} =
-		\frac{1}{2} - \frac{1}{2Z} \sum_{n=\frac{1}{2}}^{\infty}  e^{-4\pi\omega_d p_{WKB} t-\bar{\beta}\frac{n}{\lambda}}
+\frac{1}{2Z} \sum_{n=\frac{1}{2}}^{\infty}  e^{-4\pi\omega_d p_{WKB} t-\bar{\beta}\frac{n}{\lambda}}
 	\end{equation}
 	Dove abbiamo posto $p_{WKB} = 1$ per $\bar{E} > 1$.
 	\subsection{Stima di P}

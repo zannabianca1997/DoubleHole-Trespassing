@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.integrate as integrate
 import configparser as cgp
 from io import StringIO
 import subprocess
@@ -9,16 +10,20 @@ SETUP_EXT = ".ini"
 DATA_EXT = ".npy"
 
 BASE_SETUP = """[Physical]
+t = {t_bar}
 T_bar = {T_bar}
-lambda = {lambda_}
-start_path = {start_path}
+lambda = {lambda}
+euclid_path = {euclid_path}
+outher_vertex = {outher_vertex}
 [Simulation]
 SEED = {SEED}
 N = {N}
+M = {M}
+alpha = {alpha}
 repeats = {repeats}
 delta = {delta}
-samples = {samples}
-samples_spacing = {samples_spacing}"""
+delta_E = {delta_E}
+samples = {samples}"""
 
 def load(setup_path, values_path):
     # reading setup values
@@ -53,3 +58,29 @@ def find_all(root_dir):
                     yield file, data_file # return both
                 else:
                     yield file, None  # return the found file
+
+#simulation estimates
+def I_1(E):
+     a= np.sqrt(1-np.sqrt(E))
+     return integrate.quad(lambda y:np.sqrt((y**2 - 1)**2 - E), -a, a)[0]
+def I_1_approx(E):
+    return 4/3*(1-E)
+    
+def p_wkb(E, lambda_):
+    if E>=1:
+        return 1 # si può passare
+    return np.exp(-8*lambda_*I_1(E))
+
+
+def P_wkb(t, beta, lambda_, err = 10**-11):
+    sums = 0
+    n=0
+    while True:  # summing all the levels up to err
+        E = (n+(1/2))/lambda_
+        addend = np.exp(-(4*np.pi*p_wkb(E, lambda_)*t + E*beta))
+        if addend < err:
+            break
+        sums += addend
+        n+=1
+    return (np.sinh(-beta/(2*lambda_)))*sums
+
