@@ -1,0 +1,170 @@
+% !TXS template
+\documentclass[italian]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{braket}
+
+\newcommand{\op}{\hat{p}}
+\newcommand{\ox}{\hat{x}}
+\newcommand{\oy}{\hat{y}}
+\newcommand{\tc}{\quad\mathrm{t.c.}\quad}
+
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\sign}{sign}
+\newcommand{\deriv}[1]{\frac{\partial #1}{\partial x}}
+\newcommand{\dderiv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\dy}{\mathrm{d}y}
+
+\title{Uno studio sulla probabilita di tunneling in un sistema a doppia buca}
+\author{Giuseppe Zanichelli}
+
+\begin{document}
+	\section{Valutare la probabilità di tunneling}
+	L'Hamiltoniana sarà:
+	\begin{equation}
+		H(\op, \ox) = K(\op) + V(\ox) = \frac{\op^2}{2m} + V_0\left(\left(\frac{\ox}{d}\right)^2 - 1\right)^2
+	\end{equation}
+	Paramentri importanti della simulazione sono:
+	\begin{align}
+		\omega_0 & = \frac{V_0}{\hbar} & \omega_d & = \sqrt{\frac{8V_0}{md^2}} \\
+		 \lambda &= \frac{\omega_0}{\omega_d} &
+		\bar{\beta} &= \frac{V_0}{k_B T} =  \beta\hbar\omega_0&
+		\bar{t} = \omega_0 t
+	\end{align}
+	Ridimensionando
+	\subsection{Half thermodinamics}
+	Definendo il proiettore rigth:
+	\begin{align}
+		\Theta(\ox) \tc &\Theta(\ox)\ket{x} = \ket{x} & x\ge0 \\
+		&\Theta(\ox)\ket{x} = 0 & x<0
+	\end{align}
+	E l'Hamiltoniana di buca singola:
+	\begin{equation}
+		\tilde{H}(\op, \ox) = \Theta(\ox)H(\op, \ox)\Theta(\ox)
+	\end{equation}
+	La matrice densità di un sistema termalizzato ma isolato in una buca sarà $\frac{1}{\tilde{Z}}e^{-\beta\tilde{H}}$. La probabilità di trovare il sistema nella buca left è $\Tr\left[\Theta(-\ox)\hat{\rho}\right]$. Possiamo quindi scrivere la probabilità di trovare la particella nella buca sinistra dopo un tempo $t$:
+	\begin{equation}
+		P(t,\beta, \lambda) = \frac{1}{\tilde{Z}}\Tr\left[\Theta(-\ox)
+		e^{-i\frac{H}{\hbar}t}
+		e^{-\beta\tilde{H}}
+		e^{i\frac{H}{\hbar}t}
+		\right]
+	\end{equation}
+	Espandendo anche $\tilde{Z} = \Tr\left[e^{-\beta\tilde{H}}\right]$:
+	\begin{equation}
+		P(t,\beta, \lambda) = \frac{\Tr\left[\Theta(-\ox)
+			e^{-i\frac{H}{\hbar}t}
+			e^{-\beta\tilde{H}}
+			e^{i\frac{H}{\hbar}t}
+			\right]}{\Tr\left[
+			e^{-i\frac{H}{\hbar}t}
+			e^{-\beta\tilde{H}}
+			e^{i\frac{H}{\hbar}t}
+			\right]}=\frac{\int_{x=0}^{+\infty}{\mathrm{d}xf(x)}}
+		{\int_{x=-\infty}^{+\infty}\mathrm{d}xf(x)}
+	\end{equation}
+	\subsection{Path integrals}
+	Possiamo riscrivere la $f$ in termini di integrali su cammini chiusi:
+	\begin{equation}
+		f(x) = \bra{x}e^{-i\frac{H}{\hbar}t}
+		e^{-\beta\tilde{H}}
+		e^{i\frac{H}{\hbar}t}\ket{x} =
+		 \left\|N_t\right\|^2N_E \oint \mathrm{d}x_i\mathrm{d}x_i'\mathrm{d}y_i 
+		e^{i\frac{S[x_i]-S[x_i']}{\hbar} - \frac{1}{\hbar}S_E[y_i]}
+	\end{equation}
+	Dove le condizioni sui cammini sono:
+	\begin{align}
+		x_{N_t} = x_{N_t}' = x \\
+		x_0 = y_0 \quad x_0' = y_{N_E} \\
+		y_i \ge 0
+	\end{align}
+	e le lunghezze di $x, x', y$ sono rispettivamente $t, t, \beta\hbar$.
+	Per ottenere una misura reale notiamo che per ogni cammino vi è quello percorso in senso opposto, il cui peso è il complesso coniugato. Quindi:
+	\begin{align}
+	f(x) =  \left\|N_t\right\|^2N_E \oint \mathrm{d}x_i\mathrm{d}x_i'\mathrm{d}y_i 
+	\cos\left(\frac{S[x_i]-S[x_i']}{\hbar}\right) e^{-\frac{1}{\hbar}S_E[y_i]} \\ \equiv 
+	\left\|N_t\right\|^2N_E \oint \mathrm{d}x_i\mathrm{d}x_i'\mathrm{d}y_i 
+	\sign \cos\left(\frac{S[x_i]-S[x_i']}{\hbar}\right) D(x_i, x_i',y_i)
+	\end{align}
+	Dove $D$ è definito positivo, può quindi essere usata come peso per estrarre i cammini.
+	\subsection{Regolarizzare la misura}
+	Tuttavia è ancora oscillante, ciò rende la convergenza di metropolis problematica. Possiamo trovare una misura approssimata:
+	\begin{equation*}
+		\int \dx \cos(f(x)) g(x) \approx \iint \dx \dy cos(f(x)) e^{-\frac{1}{2}\alpha(x-y)^2} g(y)
+	\end{equation*}
+	dove l'approssimazione è valida se $\alpha \gg \omega_M^2$, essendo $\omega_M$ la massima frequenza ad apparire nella sequenza di fourier di $g$.
+	\begin{equation*}
+		\int \dx cos(f(x)) e^{-\frac{1}{2}\alpha(x-y)^2} \approx
+		\int \dx cos\left(f(y) + \deriv{f} x\right) e^{-\frac{1}{2}\alpha(x-y)^2} =
+		cos(f(y))e^{-\frac{1}{2\alpha} \left(\deriv{f}\right)^2}
+	\end{equation*}
+	la condizione per l'applicabilità è ora che la serie di fourier si possa tagliare al primo termine, ovvero $\alpha \gg \left(\frac{\frac{\partial^2 f}{\partial x^2}}{2 \deriv{f}}\right)^2$. Il calcolo si può estendere a $N$ dimensioni sostituendo $\frac{\partial^2 f}{\partial x^2} \to \sum_{i} \frac{\partial^2 f}{\partial x_i^2}$ e $\left(\deriv{f}\right)^2 \to \sum_{i} \left(\frac{\partial f}{\partial x_i}\right)^2$.
+	La seconda condizione, sostituendo le espressioni per $S$ e approssimando $x_i \approx d$ e $N \gg 1$, si mostra essere equivalente a $\alpha \gg \frac{1}{4d^2}$, come ci si poteva aspettare da considerazioni dimensionali.
+	Per la prima invece si può procedere così: $g = e^{-S_E}$,
+	$S_E$ è sostanzialmente maggiore di 1 se $x$ è maggiore di $d$, quindi la distribuzione $g$ è limitata in uno spazio $2d$. La sua trasformata avrà quindi dimensioni caratteristiche $\frac{1}{2d}$, ridandoci lo stesso limite precedente, ovvero che i cammini siano limitati alla zona quanto-meccanica. \\
+	Definiamo quindi $ \tilde{\alpha} \equiv 4\alpha d^2$, e riprendendo $f$:
+	\begin{equation}
+		f(x) =  \left\|N_t\right\|^2N_E \oint \mathrm{d}x\mathrm{d}x'\mathrm{d}y 
+		\left(\cos\left(\frac{S[x]-S[x']}{\hbar}\right)
+		e^{\frac{2d^2}{\hbar^2\tilde{\alpha}}\left[ \left(\dderiv{S[x]}{x}\right)^2 +\left(\dderiv{S[x']}{x'}\right)^2 \right]}\right)
+		 e^{-\frac{1}{\hbar}S_E[y] - \frac{2d^2}{\hbar^2\tilde{\alpha}}\left[ \left(\dderiv{S[x]}{x}\right)^2 +\left(\dderiv{S[x']}{x'}\right)^2 \right]}
+	\end{equation}
+	Abbiamo quindi una misura sui cammini positiva e non oscillante, che dovrebbe limitare il metropolis ai cammini importanti. Inoltre essa è esponenziale, permettendo di valutare i rapporti tra probabilità tramite semplici differenze, ed esse grazie alla differenziazione sono locali (appare solo il termine $x_{i-1}x_{i+1}$, che connette i secondi vicini).Ritornando al rapporto precedente:
+	\begin{equation}
+	P(t,\beta, \lambda) =  \frac{
+		\oint \mathrm{d}x\mathrm{d}x'\mathrm{d}y 
+	\left(\Theta(-x_{N_T})\cos\left(\frac{S[x]-S[x']}{\hbar}\right)
+	e^{\frac{2d^2}{\hbar^2\tilde{\alpha}}\left[ \left(\dderiv{S[x]}{x}\right)^2 +\left(\dderiv{S[x']}{x'}\right)^2 \right]}\right)
+	e^{-\frac{1}{\hbar}S_E[y] - \frac{2d^2}{\hbar^2\tilde{\alpha}}\left[ \left(\dderiv{S[x]}{x}\right)^2 +\left(\dderiv{S[x']}{x'}\right)^2 \right]}
+}{
+	\oint \mathrm{d}x\mathrm{d}x'\mathrm{d}y 
+	\left(\cos\left(\frac{S[x]-S[x']}{\hbar}\right)
+	e^{\frac{2d^2}{\hbar^2\tilde{\alpha}}\left[ \left(\dderiv{S[x]}{x}\right)^2 +\left(\dderiv{S[x']}{x'}\right)^2 \right]}\right)
+	e^{-\frac{1}{\hbar}S_E[y] - \frac{2d^2}{\hbar^2\tilde{\alpha}}\left[ \left(\dderiv{S[x]}{x}\right)^2 +\left(\dderiv{S[x']}{x'}\right)^2 \right]}
+}
+	\end{equation}
+	Dove le uniche restrizioni sul cammino sono le lunghezze delle tre parti($t$, $t$ e $\beta\hbar$) e la positività degli $y_i$.
+	Il parametro $\tilde{\alpha}$ è variabile: esso non influisce sul lungo termine il risultato, ma varia l'affidabilità della simulazione. $\tilde{\alpha}$ molto alto porta il metropolis ad esaminare percorsi $x_i$ molto improbabili, mentre un valore troppo basso gli impedirà di esaminare percorsi di gran importanza in un cammino finito.
+	\subsection{WKB estimate}
+	Si può usare una stima della probabilità di tunnelling WKB per capire per quali valori di $\bar{\beta}, \lambda$ e $\bar{t}$ la simulazione finirà in tempi ragionevoli.
+	Dato che siamo interessati a tempi alti, limitiamo lo studio a livelli della buca singola, dai tempi caratteristici molto più lunghi.
+	La probabilità di attraversare la barriera in WKB è:
+	\begin{equation}
+		p_{WKB}(\bar{E},\lambda)=e^{-2\int_{-ad}^{ad}\dx \sqrt{\frac{2m}{\hbar^2}(V(x)-E)}} =
+		e^{-8\lambda\int_{-a}^{a} \dy \sqrt{\left(y^2 -1\right)^2 -\bar{E}}}
+	\end{equation}
+	con $a = \sqrt{1-\sqrt{\bar{E}}}, E = \bar{E}V_0$, $E$ è l'energia della particella. Per stimare $P(\bar{t},\bar{E}, \lambda)$ modellizziamo la particella come un sistema stocastico a due stati con una probabilità su unità di tempo $2\pi\omega_d p$ di cambiare stato:
+	\begin{equation}
+		P_{WKB}(t, \bar{E}, \lambda) = \frac{1}{2} \left(1-e^{-4\pi\omega_d p_{WKB} t}\right)
+	\end{equation}
+	Mediando infine sui livelli energetici:
+	\begin{equation}
+		P_{WKB}(t, \bar{\beta}, \lambda) = \frac{1}{Z} \sum_{n=0}^{\infty} P_{WKB} e^{-\bar{\beta}\bar{E}} =
+		\frac{1}{2} - \frac{1}{2Z} \sum_{n=\frac{1}{2}}^{\infty}  e^{-4\pi\omega_d p_{WKB} t-\bar{\beta}\frac{n}{\lambda}}
+	\end{equation}
+	Dove abbiamo posto $p_{WKB} = 1$ per $\bar{E} > 1$.
+	\subsection{Stima di P}
+	Se eseguendo la simulazione otteniamo $M$ campioni, di cui $m$ hanno effettuato il tunnelling, la distribuzione di probabilità per $P$ è:
+	\begin{equation}
+		\frac{\left(M+1\right)!}{\left(M-m\right)!m!}(1-P)^{M-m}P^{m}
+	\end{equation}
+	Con media $\langle P\rangle=\frac{m+1}{M+2} \approx \frac{m+1}{M}$ e deviazione quadratica $\sigma^2 =\frac{\left(M-\left(m-1\right)\right)\left(m+1\right)}{\left(M+2\right)^{2}\left(M+3\right)} \approx \frac{m+1}{M^2}$. Se vogliamo osservare l'effetto con precisione $k$ la condizione da imporre è $\sigma^2 \le k^2 \langle P\rangle^2 $, che espressa in termini di $m$ è:
+	\begin{equation*}
+		m \ge \frac{M+1 - k^2(M+3)}{1 + k^2(M+3)} \approx \frac{1-k^2}{k^2}
+	\end{equation*}
+	Possiamo esprimere la probabilità di fallimento come una somma cumulativa su tutti gli $m$ minori del limite:
+	\begin{equation}
+		P_s =  \sum_{m=0}^{m_{max}} P(m) =  \sum_{m=0}^{m_{max}} {M\choose m}(1-P)^{M-m}P^m
+	\end{equation}
+	Per stimarlo passiamo nel limite di $P$ molto piccolo: $M \gg m$.
+	Sostituiamo ${M\choose m} \approx \frac{\left(eP\left(\frac{M}{m}+\frac{1}{2}\right)\right)^{m}}{\sqrt{2\pi m}}$ e arriviamo a:
+	\begin{equation}
+	P_s = \left({1-P} \right)^M \sum_{m=0}^{m_{max}}
+	 \frac{\left(eP\left(\frac{M}{m}+\frac{1}{2}\right)\right)^{m}}{\sqrt{2\pi m}}
+	\end{equation}
+\end{document}

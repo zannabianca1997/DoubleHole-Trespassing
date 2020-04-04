@@ -1,0 +1,17 @@
+# git ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+
+# compiled
+*.[oa]
+*.exe
+__pycache__
+
+# experimental results
+*.npy
+*.png
+*.zip
+
+# latex files
+*.aux
+*.log
+*.synctex.gz
