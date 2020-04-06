@@ -1,6 +1,7 @@
 import numpy as np
-from scipy.special import binom
+import scipy
 import scipy.integrate as integrate
+import scipy.optimize as optimize
 import configparser as cgp
 from io import StringIO
 import subprocess
@@ -85,23 +86,32 @@ def P_wkb(t, beta, lambda_, err = 10**-11):
             break
         sums += addend
         n+=1
-    return (np.sinh(-beta/(2*lambda_)))*sums
+    return 1/2 + (np.sinh(-beta/(2*lambda_)))*sums
 
-def P_f(num_data, precision, P):
-    m_min = 1 + int((num_data + 1 - (precision**2 * (num_data + 3)))/(1+(precision**2 * (num_data + 3))))
+def P_f(num_data, k, P):
+    m_min = 1 + int((num_data + 1 - (k**2 * (num_data + 3)))/(1+(k**2 * (num_data + 3))))
     sums = (1-P)**num_data
     if m_min <=1: # abbiamo solo lo 0
         return sums
     binom = 0  # the exponent of the binomial
     for m in range(1, m_min):
         binom += np.log(num_data + 1 - m) - np.log(m)
+
         sums += np.exp(
             binom + np.log(1-P)*(num_data - m) + np.log(P)*m
             )
     return sums
 
+def find_num_data(failure_p, k, P, max_num_data, tol = 1):
+    if P_f(max_num_data, k, P) > failure_p: # nemmeno il massimo basta
+        return None
+    f = optimize.root_scalar(lambda x: (P_f(int(x) ,k, P)-failure_p), xtol=tol, bracket=(1,max_num_data))
+    return int(f.root)
+
 # max cost is about 10^9
-def cost(N,M,num_data, reps)
+def cost(N,M,num_data, reps):
     return num_data * reps * (N + 2*M)
+def get_num_data(cost, N,M, reps):
+    return int(cost // reps * (N + 2*M))
     
 
