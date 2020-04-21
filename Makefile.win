@@ -1,17 +1,17 @@
 # Project: DoubleHole
 # Makefile created by Dev-C++ 5.11
 
-CPP      = g++.exe
-CC       = gcc.exe
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = Source/main.o Source/Metropolis.o Source/Ran2.o Source/LoadSetup.o Source/Output.o Source/simpleini/ConvertUTF.o
-LINKOBJ  = Source/main.o Source/Metropolis.o Source/Ran2.o Source/LoadSetup.o Source/Output.o Source/simpleini/ConvertUTF.o
-LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+OBJ      = Source/main.o Source/Metropolis.o Source/Ran2.o Source/LoadSetup.o Source/Output.o Source/simpleini/ConvertUTF.o Source/diffs.o
+LINKOBJ  = Source/main.o Source/Metropolis.o Source/Ran2.o Source/LoadSetup.o Source/Output.o Source/simpleini/ConvertUTF.o Source/diffs.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
 BIN      = DoubleHole.exe
-CXXFLAGS = $(CXXINCS) -std=c++11
-CFLAGS   = $(INCS) -std=c++11
+CXXFLAGS = $(CXXINCS) -std=gnu++11 -g3 -std=c++11
+CFLAGS   = $(INCS) -std=gnu++11 -g3 -std=c++11
 RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -41,3 +41,6 @@ Source/Output.o: Source/Output.cpp
 
 Source/simpleini/ConvertUTF.o: Source/simpleini/ConvertUTF.c
 	$(CPP) -c Source/simpleini/ConvertUTF.c -o Source/simpleini/ConvertUTF.o $(CXXFLAGS)
+
+Source/diffs.o: Source/diffs.c
+	$(CPP) -c Source/diffs.c -o Source/diffs.o $(CXXFLAGS)

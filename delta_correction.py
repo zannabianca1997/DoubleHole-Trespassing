@@ -16,12 +16,24 @@ if __name__=="__main__":
         accepted = setup.getfloat("Stats","Accepted")
         if (accepted < ACC_RANGE[1] and accepted > ACC_RANGE[0]):
             print(f"Simulation {file} runned correctly with accepted ratio {accepted}")
-            continue
-        print(f"Simulation {file} runned problematically with accepted ratio {accepted}")
-        delta = setup.getfloat("Simulation", "delta")
-        new_delta = delta * accepted / ACC_OBJ  # correcting the delta value
-        print(f"Correcting old delta {delta} with new {new_delta}")
-        if not DRY_RUN:
-            setup.set("Simulation", "delta", str(new_delta))  # changing data in memory...
-            with open(file, "w") as out:
-                setup.write(out)
+        else:
+            print(f"Simulation {file} runned problematically with accepted ratio {accepted}")
+            delta = setup.getfloat("Simulation", "delta")
+            new_delta = delta * accepted / ACC_OBJ  # correcting the delta value
+            print(f"Correcting old delta {delta} with new {new_delta}")
+            if not DRY_RUN:
+                setup.set("Simulation", "delta", str(new_delta))  # changing data in memory...
+                with open(file, "w") as out:
+                    setup.write(out)
+        accepted_E = setup.getfloat("Stats", "Accepted_E")
+        if (accepted_E < ACC_RANGE[1] and accepted_E > ACC_RANGE[0]):
+            print(f"Simulation {file} runned correctly with euclid accepted ratio {accepted_E}")
+        else:
+            print(f"Simulation {file} runned problematically with euclid accepted ratio {accepted_E}")
+            delta_E = setup.getfloat("Simulation", "delta_E")
+            new_delta_E = delta_E * accepted_E / ACC_OBJ  # correcting the delta_E value
+            print(f"Correcting old delta {delta_E} with new {new_delta_E}")
+            if not DRY_RUN:
+                setup.set("Simulation", "delta_E", str(new_delta_E))  # changing data in memory...
+                with open(file, "w") as out:
+                    setup.write(out)

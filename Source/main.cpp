@@ -26,10 +26,10 @@ int main(int argc, char** argv) {
 	CSimpleIniA ini;
 	ini.LoadFile(setup_file); //load the file
 	const SimSetup setup = read_setup(ini); //load the setups
-	SimPrecalculated precalculated; SimValues values; // creating space for the values
-	precalculate(setup, values, precalculated);  // precalculating importat values
+	SimValues values; SimPrecalculated precalculated; // creating space for the values
+	precalculate(setup, values, precalculated);  // precalculating important values
 #ifdef VERBOSE
-	std::cout << pretty_print(setup);
+	std::cout << pretty_print(setup); 
 #endif
 	ran2::set_seed(setup.SEED); // initializing random number generator
 	MetroPath sim_result = generate_initial(setup); //opening space for the simulation and setting up the initial path
@@ -39,6 +39,6 @@ int main(int argc, char** argv) {
 #endif
 	to_file(ini, values); // saving the value to ini format
 	ini.SaveFile(setup_file); // saving ini file
-	to_file(out_file, sim_result, setup); // saving data
+	to_file(out_file, sim_result, setup); // saving data*/
 	return 0;
 }

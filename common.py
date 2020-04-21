@@ -27,7 +27,8 @@ alpha = {alpha}
 repeats = {repeats}
 delta = {delta}
 delta_E = {delta_E}
-samples = {samples}"""
+samples = {samples}
+samples_spacing = {samples_spacing}"""
 
 def load(setup_path, values_path):
     # reading setup values
@@ -109,9 +110,12 @@ def find_num_data(failure_p, k, P, max_num_data, tol = 1):
     return int(f.root)
 
 # max cost is about 10^9
-def cost(N,M,num_data, reps):
+def get_cost(N,M,num_data, reps):
     return num_data * reps * (N + 2*M)
-def get_num_data(cost, N,M, reps):
-    return int(cost // reps * (N + 2*M))
+
+def get_N(beta, lambda_, eta_max):
+    # N = 1/(beta*eta_0)
+    pass
+
     
 

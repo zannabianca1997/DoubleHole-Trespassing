@@ -5,8 +5,10 @@
 \usepackage{lmodern}
 \usepackage[a4paper]{geometry}
 \usepackage{babel}
+
 \usepackage{amsmath}
 \usepackage{braket}
+\usepackage{graphicx}
 
 \newcommand{\op}{\hat{p}}
 \newcommand{\ox}{\hat{x}}
@@ -36,7 +38,7 @@
 		\bar{\beta} &= \frac{V_0}{k_B T} =  \beta\hbar\omega_0&
 		\bar{t} = \omega_0 t
 	\end{align}
-	Ridimensionando
+	Si è usato $\omega_0$ come unità di misura temporale perchè siamo interessati a studiare i fenomeni di tunnelling, che interessano il livello energetico della barriera $V_0$. Si può notare che $\lambda$ è una misura di quanto sono "separate" le buche: esso può essere riscritto come $\frac{V_0}{\hbar\omega_d}$, ovvero approssimativamente quanti livelli di buca singola vi sono. I fenomeni a cui siamo interessati saranno dunque nella zona $\bar{\beta} > 1$ (affinchè le particelle siano intrappolate nelle buche), $\lambda > 1$ (perchè le buche abbiano stati approssimati di buca singola).
 	\subsection{Half thermodinamics}
 	Definendo il proiettore rigth:
 	\begin{align}
@@ -130,7 +132,7 @@
 	\end{equation}
 	Dove le uniche restrizioni sul cammino sono le lunghezze delle tre parti($t$, $t$ e $\beta\hbar$) e la positività degli $y_i$.
 	Il parametro $\tilde{\alpha}$ è variabile: esso non influisce sul lungo termine il risultato, ma varia l'affidabilità della simulazione. $\tilde{\alpha}$ molto alto porta il metropolis ad esaminare percorsi $x_i$ molto improbabili, mentre un valore troppo basso gli impedirà di esaminare percorsi di gran importanza in un cammino finito.
-	\subsection{WKB estimate}
+	\section{WKB estimate}
 	Si può usare una stima della probabilità di tunnelling WKB per capire per quali valori di $\bar{\beta}, \lambda$ e $\bar{t}$ la simulazione finirà in tempi ragionevoli.
 	Dato che siamo interessati a tempi alti, limitiamo lo studio a livelli della buca singola, dai tempi caratteristici molto più lunghi.
 	La probabilità di attraversare la barriera in WKB è:
@@ -148,23 +150,83 @@
 \frac{1}{2} - \frac{1}{2Z} \sum_{n=\frac{1}{2}}^{\infty}  e^{-4\pi\omega_d p_{WKB} t-\bar{\beta}\frac{n}{\lambda}}
 	\end{equation}
 	Dove abbiamo posto $p_{WKB} = 1$ per $\bar{E} > 1$.
+	\begin{figure}[h]
+		\label{P_WKB}
+		\includegraphics[scale = 0.6]{Test_betas.png}
+		\centering
+		\caption{Esempi di tunnelling nell'approssimazione WKB, per $\lambda \in [1, 2, 3, 4]$}
+	\end{figure}
+	Qualche esempio di tunnelling si può vedere in figura \ref{P_WKB}.
 	\subsection{Stima di P}
-	Se eseguendo la simulazione otteniamo $M$ campioni, di cui $m$ hanno effettuato il tunnelling, la distribuzione di probabilità per $P$ è:
+	Se eseguendo la simulazione otteniamo $D$ campioni, di cui $d$ hanno effettuato il tunnelling, la distribuzione di probabilità per $P$ è:
 	\begin{equation}
-		\frac{\left(M+1\right)!}{\left(M-m\right)!m!}(1-P)^{M-m}P^{m}
+		\frac{\left(D+1\right)!}{\left(D-d\right)!d!}(1-P)^{D-d}P^{d}
 	\end{equation}
-	Con media $\langle P\rangle=\frac{m+1}{M+2} \approx \frac{m+1}{M}$ e deviazione quadratica $\sigma^2 =\frac{\left(M-\left(m-1\right)\right)\left(m+1\right)}{\left(M+2\right)^{2}\left(M+3\right)} \approx \frac{m+1}{M^2}$. Se vogliamo osservare l'effetto con precisione $k$ la condizione da imporre è $\sigma^2 \le k^2 \langle P\rangle^2 $, che espressa in termini di $m$ è:
+	Con media $\langle P\rangle=\frac{d+1}{D+2} \approx \frac{d+1}{D}$ e deviazione quadratica $\sigma^2 =\frac{\left(D-\left(d-1\right)\right)\left(d+1\right)}{\left(D+2\right)^{2}\left(D+3\right)} \approx \frac{d+1}{D^2}$. Se vogliamo osservare l'effetto con precisione $k$ la condizione da imporre è $\sigma^2 \le k^2 \langle P\rangle^2 $, che espressa in termini di $d$ è:
 	\begin{equation*}
-		m \ge \frac{M+1 - k^2(M+3)}{1 + k^2(M+3)} \approx \frac{1-k^2}{k^2}
+		d \ge \frac{D+1 - k^2(D+3)}{1 + k^2(D+3)} \approx \frac{1-k^2}{k^2}
 	\end{equation*}
-	Possiamo esprimere la probabilità di fallimento come una somma cumulativa su tutti gli $m$ minori del limite:
+	Possiamo esprimere la probabilità di fallimento come una somma cumulativa su tutti gli $d$ minori del limite:
 	\begin{equation}
-		P_s =  \sum_{m=0}^{m_{max}} P(m) =  \sum_{m=0}^{m_{max}} {M\choose m}(1-P)^{M-m}P^m
+		P_f =  \sum_{d=0}^{d_{max}} P(d) =  \sum_{d=0}^{d_{max}} {D\choose d}(1-P)^{D-d}P^d
 	\end{equation}
-	Per stimarlo passiamo nel limite di $P$ molto piccolo: $M \gg m$.
-	Sostituiamo ${M\choose m} \approx \frac{\left(eP\left(\frac{M}{m}+\frac{1}{2}\right)\right)^{m}}{\sqrt{2\pi m}}$ e arriviamo a:
+	Per stimarlo passiamo nel limite di $P$ molto piccolo: $D \gg d$.
+	Sostituiamo ${D\choose d} \approx \frac{\left(eP\left(\frac{D}{d}+\frac{1}{2}\right)\right)^{d}}{\sqrt{2\pi d}}$ e arriviamo a:
 	\begin{equation}
-	P_s = \left({1-P} \right)^M \sum_{m=0}^{m_{max}}
-	 \frac{\left(eP\left(\frac{M}{m}+\frac{1}{2}\right)\right)^{m}}{\sqrt{2\pi m}}
+	P_f = \left({1-P} \right)^D \sum_{d=0}^{d_{max}}
+	 \frac{\left(eP\left(\frac{D}{d}+\frac{1}{2}\right)\right)^{d}}{\sqrt{2\pi d}}
 	\end{equation}
+	\begin{figure}[h]
+		\label{D_estimate_pic}
+		\includegraphics[scale = 0.8]{WKB_analisis.png}
+		\centering
+		\caption{Numero di campioni necessari per avere $P_f < 0.02$ con $k = 0.1$, $\bar{t} = 1$ nell'approssimazione WKB}
+	\end{figure}
+	Si può osservare il risultato in figura \ref{D_estimate_pic}.
+	Vi è un evidente effetto periodico in $\lambda$ causato dal passaggio di livelli energetici della doppia buca alla parte quartica del sistema. Ciò potrebbe essere molto accentuato dalle approssimazioni fatte in WKB, sarebbe interessante riosservarlo nelle simulazioni.
+	\section{Discretizzazione}
+	Avendo due tempi ($t$ e $\beta\hbar$) dobbiamo scegliere due passi temporali, rispettivamente $a$ e $b$. Definiamo quindi il numero di punti del sistema:
+	\begin{align*}
+		N =& \frac{\beta\hbar}{a} \equiv \frac{\bar{\beta}}{\eta_a} &
+		 M =& \frac{t}{\beta} \equiv \frac{\bar{t}}{\eta_b}
+	\end{align*}
+	Dato che siamo in $\lambda > 1$, $\omega_0$ è la scala temporale più stringente, quindi la simulazione è affidabile per $\eta_a, \eta_b \ll 1$.
+	L'azione euclidea adimensionale discretizzata risulta essere:
+	\begin{align*}
+		S_E &= \frac{1}{\hbar} \int \mathrm{d}\tau \frac{m}{2} \left(\dderiv{y}{\tau}\right)^2 + V(y) = \\
+		&=\frac{1}{\hbar}\sum_{i=0}^{N-1} a \left( \frac{m}{2} \left(\frac{y_{i+1}-y_i}{a}\right)^2 + V(y_i) \right) = \\
+		&=\sum_{i=0}^{N-1} \frac{md^2}{2a\hbar}\left(\frac{y_{i+1}-y_i}{d}\right)^2+ 
+		\frac{aV_0}{\hbar} \left(\left(\frac{y_i}{d}\right)^2 -1\right)^2
+	\end{align*}
+	\begin{equation}
+		S_E[\tilde{y}] = \sum_{i=0}^{N-1} \frac{4\lambda^2}{\eta_a}\left(\tilde{y}_{i+1}-\tilde{y}_i\right)^2 + 
+		\eta_a \left(\tilde{y}_i^2 -1\right)^2
+	\end{equation}
+	L'azione adimensionale diventa similarmente:
+	\begin{equation}
+		S[\tilde{x}] = \sum_{i=0}^{M-1} \frac{4\lambda^2}{\eta_b}\left(\tilde{x}_{i+1}-\tilde{x}_i\right)^2 -
+		\eta_b \left(\tilde{x}_i^2 -1\right)^2
+	\end{equation}
+	Siamo anche interessati al quadrato del suo gradiente:
+	\begin{equation*}
+		d\dderiv{S[\tilde{x}]}{x_i} = \dderiv{S[\tilde{x}]}{\tilde{x}_i} = - 4 \eta_{b} \tilde{x}_{i} \left(\tilde{x}_{i}^{2} - 1\right) + \frac{8 \lambda^{2}}{\eta_{b}} \left(2\tilde{x}_{i} - \tilde{x}_{i-1} - \tilde{x}_{i+1}\right)
+	\end{equation*}
+	\begin{multline}
+		 \sum_{i=0}^{M-1}\left(\dderiv{S[\tilde{x}]}{\tilde{x}_i}\right)^2 =
+		 16 \sum_{i=0}^{M-1} 
+		\eta_{b}^{2} \tilde{x}_{i}^{6} -
+		 2 \tilde{x}_{i}^{4} \left(\eta_{b}^{2} + 4 \lambda^{2}\right) +
+		 4 \lambda^{2} \tilde{x}_{i}^{3} \left(\tilde{x}_{i+1} + \tilde{x}_{i-1}\right) + \\
+	 	 \tilde{x}_{i}^{2} \left(\frac{4 \lambda^{2}}{\eta_{b}} + \eta_{b} \right)^2 - 
+		 \tilde{x}_{i} \left(\tilde{x}_{i+1} + \tilde{x}_{i-1}\right)\left(4 \lambda^{2} + \left(\frac{4 \lambda^{2}}{\eta_{b}}\right)^{2}\right) + \\
+		 \frac{4 \lambda^{4} \tilde{x}_{i+1}^{2}}{\eta_{b}^{2}} + 
+		 \frac{8 \lambda^{4} \tilde{x}_{i+1} \tilde{x}_{i-1}}{\eta_{b}^{2}} + 
+		 \frac{4 \lambda^{4} \tilde{x}_{i-1}^{2}}{\eta_{b}^{2}}
+	\end{multline}
+	Dove bisogna mettere $x_{-1} = 0$. Restano da calcolare le differenze, necessarie per ottenere i rapporti di probabilità. Bisogna avere estrema cura per i contorni: le condizioni non sono periodiche. Essendo tutte le formule polinomiali
+	\begin{equation}
+		\left.S_E[\tilde{y}]\right|_{y_i \to y'_i} - S_E[\tilde{y}] =
+		 \sum_{i=0}^{N-1} 
+	\end{equation}
+	
 \end{document}

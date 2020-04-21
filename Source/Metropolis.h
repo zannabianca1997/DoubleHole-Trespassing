@@ -6,18 +6,15 @@
 
 /* represent the values for the simulation*/
 struct SimValues {
-	FACTOR_T eta_0;
-	FACTOR_T eta_d;
+	FACTOR_T eta_a;
+	FACTOR_T eta_b;
 	STATS_T accepted;
+	STATS_T accepted_E;
 	unsigned int calc_time;
 };
 
 /* precalculated values for the simulation */
-struct SimPrecalculated{
-	FACTOR_T quartic_factor;
-	FACTOR_T square_factor;
-	FACTOR_T near_factor;
-};
+typedef FACTOR_T * SimPrecalculated;
 
 /* represent the system */
 typedef CELL_T* MetroPath;  // a metropolis walks, aka a list of path of len setup.samples
@@ -29,9 +26,6 @@ void precalculate(const SimSetup setup, SimValues& values, SimPrecalculated& pre
 
 /* generate a random initial path */
 Path generate_initial(const SimSetup setup);
-
-/* make an entire pass on the state n, storing the new state on n+1 */
-STATS_T step(Path state, const SimSetup& setup, const SimPrecalculated& precalculated);
 
 /* execute the simulation */
 void metropolis(const MetroPath state, const SimSetup setup, SimValues& values, const SimPrecalculated precalculated);
