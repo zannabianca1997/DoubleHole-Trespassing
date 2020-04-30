@@ -35,7 +35,6 @@ void precalculate(double M, double N, double alpha, double eta_a, double eta_b, 
    double t30;
    double t31;
    double t32;
-   double t33;
    // Common expressions;
    t0 = 1.0/eta_a;
    t1 = eta_a*eta_a;
@@ -59,18 +58,17 @@ void precalculate(double M, double N, double alpha, double eta_a, double eta_b, 
    t19 = 768*t8;
    t20 = t17*t6;
    t21 = t11*t6;
-   t22 = 64*t6;
-   t23 = 256*t3;
-   t24 = 256*t6;
-   t25 = 384*t6;
-   t26 = 384*t11*t3;
-   t27 = eta_b*eta_b*eta_b*eta_b;
-   t28 = 32*t27;
-   t29 = -t28;
-   t30 = t23*t6;
-   t31 = 64*t27;
-   t32 = -t31;
-   t33 = 512*t3;
+   t22 = 256*t6;
+   t23 = 384*t6;
+   t24 = 384*t11*t3;
+   t25 = eta_b*eta_b*eta_b*eta_b;
+   t26 = 64*t25;
+   t27 = -t26;
+   t28 = 512*t3;
+   t29 = 64*t6;
+   t30 = 32*t25;
+   t31 = -t30;
+   t32 = t22*t3;
    // Calculating output;
    p[0] = -eta_a;
    p[1] = -4*eta_a;
@@ -83,33 +81,33 @@ void precalculate(double M, double N, double alpha, double eta_a, double eta_b, 
    p[8] = -t16;
    p[9] = -t18;
    p[10] = t12*(t19 + t20);
-   p[11] = -32*t21;
-   p[12] = -192*t21;
-   p[13] = -480*t21;
-   p[14] = t11*(t22 + t23);
-   p[15] = -640*t21;
-   p[16] = t11*(t24 + 1024*t3);
-   p[17] = t11*(t25 + 1536*t3);
-   p[18] = -t26;
-   p[19] = t12*(-t19 + t29 - t30);
-   p[20] = t12*(t32 - t33*t6 - 1536*t8);
-   p[21] = t12*(t30 + 1024*t8);
-   p[22] = t11*(t17 + t22);
-   p[23] = t11*(t24 + t33);
-   p[24] = t11*(t25 + 768*t3);
-   p[25] = t13*(-eta_a*t20 - eta_a*t28 + t15);
-   p[26] = t13*(-eta_a*t30 - eta_a*t31 + t10);
-   p[27] = t12*(t19 + t30);
-   p[28] = t12*t9;
-   p[29] = t11*t24;
-   p[30] = t11*t25;
-   p[31] = t26;
-   p[32] = t12*(t32 - t9);
-   p[33] = t11*t22;
-   p[34] = t18;
-   p[35] = t12*(-t14 + t29);
-   p[36] = t12*(t30 + t9);
-   p[37] = t16;
+   p[11] = -192*t21;
+   p[12] = -480*t21;
+   p[13] = -640*t21;
+   p[14] = t11*(t22 + 1024*t3);
+   p[15] = t11*(t23 + 1536*t3);
+   p[16] = -t24;
+   p[17] = t12*(t27 - t28*t6 - 1536*t8);
+   p[18] = -32*t21;
+   p[19] = t11*(t29 + 256*t3);
+   p[20] = t12*(-t19 + t31 - t32);
+   p[21] = t12*(t32 + 1024*t8);
+   p[22] = t11*(t22 + t28);
+   p[23] = t11*(t23 + 768*t3);
+   p[24] = t13*(-eta_a*t26 - eta_a*t32 + t10);
+   p[25] = t11*(t17 + t29);
+   p[26] = t13*(-eta_a*t20 - eta_a*t30 + t15);
+   p[27] = t12*(t19 + t32);
+   p[28] = t16;
+   p[29] = t12*t9;
+   p[30] = t11*t29;
+   p[31] = t11*t22;
+   p[32] = t18;
+   p[33] = t11*t23;
+   p[34] = t24;
+   p[35] = t12*(-t14 + t31);
+   p[36] = t12*(t27 - t9);
+   p[37] = t12*(t32 + t9);
 }
 
 void cache_diff_y_j(double y_b, double y_n, double * p, double * c){
@@ -173,8 +171,8 @@ void cache_diff_x1_j(double x1_b, double x1_bb, double x1_n, double x1_nn, doubl
    // Common expressions;
    t0 = x1_b + x1_n;
    // Calculating output;
-   c[0] = t0*p[9];
-   c[1] = t0*p[18];
+   c[0] = t0*p[16];
+   c[1] = t0*p[9];
    c[2] = t0*p[21] + (x1_bb + x1_nn)*p[8] + p[9]*(x1_b*x1_b*x1_b + x1_n*x1_n*x1_n);
 }
 
@@ -193,7 +191,7 @@ double diff_x1_j(double d, double x1_j, double * p, double * c){
    t3 = x1_j*x1_j;
    t4 = x1_j*x1_j*x1_j;
    // Calculating output;
-   return d*x1_j*p[20] + d*c[2] + t0*t3*p[17] + t0*p[19] + t1*t4*p[15] + t1*c[0] + t2*p[14] + (d*t3 + t0*x1_j)*c[1] + (d*t4 + t1*x1_j)*p[16] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x1_j*x1_j*x1_j*x1_j*x1_j) + x1_j*(d*d*d*d*d)) + p[13]*(t0*(x1_j*x1_j*x1_j*x1_j) + t2*t3);
+   return d*x1_j*p[17] + d*c[2] + t0*t3*p[15] + t0*p[20] + t1*t4*p[13] + t1*c[1] + t2*p[19] + (d*t3 + t0*x1_j)*c[0] + (d*t4 + t1*x1_j)*p[14] + p[11]*(d*(x1_j*x1_j*x1_j*x1_j*x1_j) + x1_j*(d*d*d*d*d)) + p[12]*(t0*(x1_j*x1_j*x1_j*x1_j) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x1_0(double x1_1, double x1_2, double y_N_1, double * p, double * c){
@@ -201,8 +199,8 @@ void cache_diff_x1_0(double x1_1, double x1_2, double y_N_1, double * p, double 
    // Declaring temp vars;
    // Common expressions;
    // Calculating output;
-   c[0] = x1_1*p[9];
-   c[1] = x1_1*p[18];
+   c[0] = x1_1*p[16];
+   c[1] = x1_1*p[9];
    c[2] = x1_1*p[27] + x1_2*p[8] + y_N_1*p[5] + p[9]*(x1_1*x1_1*x1_1);
 }
 
@@ -221,7 +219,7 @@ double diff_x1_0(double d, double x1_0, double * p, double * c){
    t3 = x1_0*x1_0;
    t4 = x1_0*x1_0*x1_0;
    // Calculating output;
-   return d*x1_0*p[26] + d*c[2] + t0*t3*p[24] + t0*p[25] + t1*t4*p[15] + t1*c[0] + t2*p[22] + (d*t3 + t0*x1_0)*c[1] + (d*t4 + t1*x1_0)*p[23] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x1_0*x1_0*x1_0*x1_0*x1_0) + x1_0*(d*d*d*d*d)) + p[13]*(t0*(x1_0*x1_0*x1_0*x1_0) + t2*t3);
+   return d*x1_0*p[24] + d*c[2] + t0*t3*p[23] + t0*p[26] + t1*t4*p[13] + t1*c[1] + t2*p[25] + (d*t3 + t0*x1_0)*c[0] + (d*t4 + t1*x1_0)*p[22] + p[11]*(d*(x1_0*x1_0*x1_0*x1_0*x1_0) + x1_0*(d*d*d*d*d)) + p[12]*(t0*(x1_0*x1_0*x1_0*x1_0) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x1_1(double x1_0, double x1_2, double x1_3, double * p, double * c){
@@ -232,7 +230,7 @@ void cache_diff_x1_1(double x1_0, double x1_2, double x1_3, double * p, double *
    t0 = x1_0 + x1_2;
    // Calculating output;
    c[0] = t0*p[9];
-   c[1] = t0*p[18];
+   c[1] = t0*p[16];
    c[2] = x1_0*p[27] + x1_2*p[21] + x1_3*p[8] + p[9]*(x1_0*x1_0*x1_0 + x1_2*x1_2*x1_2);
 }
 
@@ -251,7 +249,7 @@ double diff_x1_1(double d, double x1_1, double * p, double * c){
    t3 = x1_1*x1_1;
    t4 = x1_1*x1_1*x1_1;
    // Calculating output;
-   return d*x1_1*p[20] + d*c[2] + t0*t3*p[17] + t0*p[19] + t1*t4*p[15] + t1*c[0] + t2*p[14] + (d*t3 + t0*x1_1)*c[1] + (d*t4 + t1*x1_1)*p[16] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x1_1*x1_1*x1_1*x1_1*x1_1) + x1_1*(d*d*d*d*d)) + p[13]*(t0*(x1_1*x1_1*x1_1*x1_1) + t2*t3);
+   return d*x1_1*p[17] + d*c[2] + t0*t3*p[15] + t0*p[20] + t1*t4*p[13] + t1*c[0] + t2*p[19] + (d*t3 + t0*x1_1)*c[1] + (d*t4 + t1*x1_1)*p[14] + p[11]*(d*(x1_1*x1_1*x1_1*x1_1*x1_1) + x1_1*(d*d*d*d*d)) + p[12]*(t0*(x1_1*x1_1*x1_1*x1_1) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x1_M_2(double x1_M_1, double x1_M_3, double x1_M_4, double x2_0, double * p, double * c){
@@ -262,7 +260,7 @@ void cache_diff_x1_M_2(double x1_M_1, double x1_M_3, double x1_M_4, double x2_0,
    t0 = x1_M_1 + x1_M_3;
    // Calculating output;
    c[0] = t0*p[9];
-   c[1] = t0*p[18];
+   c[1] = t0*p[16];
    c[2] = t0*p[21] + (x1_M_4 + x2_0)*p[8] + p[9]*(x1_M_1*x1_M_1*x1_M_1 + x1_M_3*x1_M_3*x1_M_3);
 }
 
@@ -281,7 +279,7 @@ double diff_x1_M_2(double d, double x1_M_2, double * p, double * c){
    t3 = x1_M_2*x1_M_2;
    t4 = x1_M_2*x1_M_2*x1_M_2;
    // Calculating output;
-   return d*x1_M_2*p[20] + d*c[2] + t0*t3*p[17] + t0*p[19] + t1*t4*p[15] + t1*c[0] + t2*p[14] + (d*t3 + t0*x1_M_2)*c[1] + (d*t4 + t1*x1_M_2)*p[16] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x1_M_2*x1_M_2*x1_M_2*x1_M_2*x1_M_2) + x1_M_2*(d*d*d*d*d)) + p[13]*(t0*(x1_M_2*x1_M_2*x1_M_2*x1_M_2) + t2*t3);
+   return d*x1_M_2*p[17] + d*c[2] + t0*t3*p[15] + t0*p[20] + t1*t4*p[13] + t1*c[0] + t2*p[19] + (d*t3 + t0*x1_M_2)*c[1] + (d*t4 + t1*x1_M_2)*p[14] + p[11]*(d*(x1_M_2*x1_M_2*x1_M_2*x1_M_2*x1_M_2) + x1_M_2*(d*d*d*d*d)) + p[12]*(t0*(x1_M_2*x1_M_2*x1_M_2*x1_M_2) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x1_M_1(double x1_M_2, double x1_M_3, double x2_0, double x2_1, double * p, double * c){
@@ -291,9 +289,9 @@ void cache_diff_x1_M_1(double x1_M_2, double x1_M_3, double x2_0, double x2_1, d
    // Common expressions;
    t0 = x1_M_2 + x2_0;
    // Calculating output;
-   c[0] = t0*p[18];
-   c[1] = t0*p[9];
-   c[2] = x1_M_2*p[21] + x2_0*p[28] + (x1_M_3 - x2_1)*p[8] + p[9]*(x1_M_2*x1_M_2*x1_M_2 - x2_0*x2_0*x2_0);
+   c[0] = t0*p[9];
+   c[1] = t0*p[16];
+   c[2] = x1_M_2*p[21] + x2_0*p[29] + (-x1_M_3 + x2_1)*p[28] + p[9]*(x1_M_2*x1_M_2*x1_M_2 - x2_0*x2_0*x2_0);
 }
 
 double diff_x1_M_1(double d, double x1_M_1, double * p, double * c){
@@ -311,7 +309,7 @@ double diff_x1_M_1(double d, double x1_M_1, double * p, double * c){
    t3 = x1_M_1*x1_M_1;
    t4 = x1_M_1*x1_M_1*x1_M_1;
    // Calculating output;
-   return d*x1_M_1*p[20] + d*c[2] + t0*t3*p[17] + t0*p[19] + t1*t4*p[15] + t1*c[1] + t2*p[14] + (d*t3 + t0*x1_M_1)*c[0] + (d*t4 + t1*x1_M_1)*p[16] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x1_M_1*x1_M_1*x1_M_1*x1_M_1*x1_M_1) + x1_M_1*(d*d*d*d*d)) + p[13]*(t0*(x1_M_1*x1_M_1*x1_M_1*x1_M_1) + t2*t3);
+   return d*x1_M_1*p[17] + d*c[2] + t0*t3*p[15] + t0*p[20] + t1*t4*p[13] + t1*c[0] + t2*p[19] + (d*t3 + t0*x1_M_1)*c[1] + (d*t4 + t1*x1_M_1)*p[14] + p[11]*(d*(x1_M_1*x1_M_1*x1_M_1*x1_M_1*x1_M_1) + x1_M_1*(d*d*d*d*d)) + p[12]*(t0*(x1_M_1*x1_M_1*x1_M_1*x1_M_1) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x2_j(double x2_b, double x2_bb, double x2_n, double x2_nn, double * p, double * c){
@@ -321,8 +319,8 @@ void cache_diff_x2_j(double x2_b, double x2_bb, double x2_n, double x2_nn, doubl
    // Common expressions;
    t0 = x2_b + x2_n;
    // Calculating output;
-   c[0] = t0*p[18];
-   c[1] = t0*p[9];
+   c[0] = t0*p[9];
+   c[1] = t0*p[16];
    c[2] = t0*p[21] + (x2_bb + x2_nn)*p[8] + p[9]*(x2_b*x2_b*x2_b + x2_n*x2_n*x2_n);
 }
 
@@ -341,7 +339,7 @@ double diff_x2_j(double d, double x2_j, double * p, double * c){
    t3 = x2_j*x2_j;
    t4 = x2_j*x2_j*x2_j;
    // Calculating output;
-   return d*x2_j*p[20] + d*c[2] + t0*t3*p[17] + t0*p[19] + t1*t4*p[15] + t1*c[1] + t2*p[14] + (d*t3 + t0*x2_j)*c[0] + (d*t4 + t1*x2_j)*p[16] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x2_j*x2_j*x2_j*x2_j*x2_j) + x2_j*(d*d*d*d*d)) + p[13]*(t0*(x2_j*x2_j*x2_j*x2_j) + t2*t3);
+   return d*x2_j*p[17] + d*c[2] + t0*t3*p[15] + t0*p[20] + t1*t4*p[13] + t1*c[0] + t2*p[19] + (d*t3 + t0*x2_j)*c[1] + (d*t4 + t1*x2_j)*p[14] + p[11]*(d*(x2_j*x2_j*x2_j*x2_j*x2_j) + x2_j*(d*d*d*d*d)) + p[12]*(t0*(x2_j*x2_j*x2_j*x2_j) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x2_0(double x1_M_1, double x1_M_2, double x2_1, double x2_2, double * p, double * c){
@@ -351,9 +349,9 @@ void cache_diff_x2_0(double x1_M_1, double x1_M_2, double x2_1, double x2_2, dou
    // Common expressions;
    t0 = x1_M_1 - x2_1;
    // Calculating output;
-   c[0] = t0*p[31];
+   c[0] = t0*p[32];
    c[1] = t0*p[34];
-   c[2] = x1_M_1*p[28] + x2_1*p[36] + (x1_M_2 + x2_2)*p[8] + p[9]*(x1_M_1*x1_M_1*x1_M_1 + x2_1*x2_1*x2_1);
+   c[2] = x1_M_1*p[29] + x2_1*p[37] + (x1_M_2 + x2_2)*p[8] + p[9]*(x1_M_1*x1_M_1*x1_M_1 + x2_1*x2_1*x2_1);
 }
 
 double diff_x2_0(double d, double x2_0, double * p, double * c){
@@ -371,7 +369,7 @@ double diff_x2_0(double d, double x2_0, double * p, double * c){
    t3 = x2_0*x2_0;
    t4 = x2_0*x2_0*x2_0;
    // Calculating output;
-   return d*x2_0*p[32] + d*c[2] + t0*t3*p[30] + t0*p[35] + t1*t4*p[15] + t1*c[1] + t2*p[33] + (d*t3 + t0*x2_0)*c[0] + (d*t4 + t1*x2_0)*p[29] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x2_0*x2_0*x2_0*x2_0*x2_0) + x2_0*(d*d*d*d*d)) + p[13]*(t0*(x2_0*x2_0*x2_0*x2_0) + t2*t3);
+   return d*x2_0*p[36] + d*c[2] + t0*t3*p[33] + t0*p[35] + t1*t4*p[13] + t1*c[0] + t2*p[30] + (d*t3 + t0*x2_0)*c[1] + (d*t4 + t1*x2_0)*p[31] + p[11]*(d*(x2_0*x2_0*x2_0*x2_0*x2_0) + x2_0*(d*d*d*d*d)) + p[12]*(t0*(x2_0*x2_0*x2_0*x2_0) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x2_1(double x1_M_1, double x2_0, double x2_2, double x2_3, double * p, double * c){
@@ -381,9 +379,9 @@ void cache_diff_x2_1(double x1_M_1, double x2_0, double x2_2, double x2_3, doubl
    // Common expressions;
    t0 = x2_0 + x2_2;
    // Calculating output;
-   c[0] = t0*p[9];
-   c[1] = t0*p[18];
-   c[2] = x2_0*p[36] + x2_2*p[21] + (x1_M_1 - x2_3)*p[37] + p[9]*(x2_0*x2_0*x2_0 + x2_2*x2_2*x2_2);
+   c[0] = t0*p[16];
+   c[1] = t0*p[9];
+   c[2] = x2_0*p[37] + x2_2*p[21] + (x1_M_1 - x2_3)*p[28] + p[9]*(x2_0*x2_0*x2_0 + x2_2*x2_2*x2_2);
 }
 
 double diff_x2_1(double d, double x2_1, double * p, double * c){
@@ -401,7 +399,7 @@ double diff_x2_1(double d, double x2_1, double * p, double * c){
    t3 = x2_1*x2_1;
    t4 = x2_1*x2_1*x2_1;
    // Calculating output;
-   return d*x2_1*p[20] + d*c[2] + t0*t3*p[17] + t0*p[19] + t1*t4*p[15] + t1*c[0] + t2*p[14] + (d*t3 + t0*x2_1)*c[1] + (d*t4 + t1*x2_1)*p[16] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x2_1*x2_1*x2_1*x2_1*x2_1) + x2_1*(d*d*d*d*d)) + p[13]*(t0*(x2_1*x2_1*x2_1*x2_1) + t2*t3);
+   return d*x2_1*p[17] + d*c[2] + t0*t3*p[15] + t0*p[20] + t1*t4*p[13] + t1*c[1] + t2*p[19] + (d*t3 + t0*x2_1)*c[0] + (d*t4 + t1*x2_1)*p[14] + p[11]*(d*(x2_1*x2_1*x2_1*x2_1*x2_1) + x2_1*(d*d*d*d*d)) + p[12]*(t0*(x2_1*x2_1*x2_1*x2_1) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x2_M_2(double x2_M_1, double x2_M_3, double x2_M_4, double y_0, double * p, double * c){
@@ -411,8 +409,8 @@ void cache_diff_x2_M_2(double x2_M_1, double x2_M_3, double x2_M_4, double y_0, 
    // Common expressions;
    t0 = x2_M_1 + x2_M_3;
    // Calculating output;
-   c[0] = t0*p[18];
-   c[1] = t0*p[9];
+   c[0] = t0*p[9];
+   c[1] = t0*p[16];
    c[2] = t0*p[21] + (x2_M_4 + y_0)*p[8] + p[9]*(x2_M_1*x2_M_1*x2_M_1 + x2_M_3*x2_M_3*x2_M_3);
 }
 
@@ -431,7 +429,7 @@ double diff_x2_M_2(double d, double x2_M_2, double * p, double * c){
    t3 = x2_M_2*x2_M_2;
    t4 = x2_M_2*x2_M_2*x2_M_2;
    // Calculating output;
-   return d*x2_M_2*p[20] + d*c[2] + t0*t3*p[17] + t0*p[19] + t1*t4*p[15] + t1*c[1] + t2*p[14] + (d*t3 + t0*x2_M_2)*c[0] + (d*t4 + t1*x2_M_2)*p[16] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x2_M_2*x2_M_2*x2_M_2*x2_M_2*x2_M_2) + x2_M_2*(d*d*d*d*d)) + p[13]*(t0*(x2_M_2*x2_M_2*x2_M_2*x2_M_2) + t2*t3);
+   return d*x2_M_2*p[17] + d*c[2] + t0*t3*p[15] + t0*p[20] + t1*t4*p[13] + t1*c[0] + t2*p[19] + (d*t3 + t0*x2_M_2)*c[1] + (d*t4 + t1*x2_M_2)*p[14] + p[11]*(d*(x2_M_2*x2_M_2*x2_M_2*x2_M_2*x2_M_2) + x2_M_2*(d*d*d*d*d)) + p[12]*(t0*(x2_M_2*x2_M_2*x2_M_2*x2_M_2) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 void cache_diff_x2_M_1(double x2_M_2, double x2_M_3, double y_0, double * p, double * c){
@@ -442,7 +440,7 @@ void cache_diff_x2_M_1(double x2_M_2, double x2_M_3, double y_0, double * p, dou
    t0 = x2_M_2 + y_0;
    // Calculating output;
    c[0] = t0*p[9];
-   c[1] = t0*p[18];
+   c[1] = t0*p[16];
    c[2] = x2_M_2*p[21] + x2_M_3*p[8] + y_0*p[10] + p[9]*(x2_M_2*x2_M_2*x2_M_2);
 }
 
@@ -461,7 +459,7 @@ double diff_x2_M_1(double d, double x2_M_1, double * p, double * c){
    t3 = x2_M_1*x2_M_1;
    t4 = x2_M_1*x2_M_1*x2_M_1;
    // Calculating output;
-   return d*x2_M_1*p[20] + d*c[2] + t0*t3*p[17] + t0*p[19] + t1*t4*p[15] + t1*c[0] + t2*p[14] + (d*t3 + t0*x2_M_1)*c[1] + (d*t4 + t1*x2_M_1)*p[16] + p[11]*(d*d*d*d*d*d) + p[12]*(d*(x2_M_1*x2_M_1*x2_M_1*x2_M_1*x2_M_1) + x2_M_1*(d*d*d*d*d)) + p[13]*(t0*(x2_M_1*x2_M_1*x2_M_1*x2_M_1) + t2*t3);
+   return d*x2_M_1*p[17] + d*c[2] + t0*t3*p[15] + t0*p[20] + t1*t4*p[13] + t1*c[0] + t2*p[19] + (d*t3 + t0*x2_M_1)*c[1] + (d*t4 + t1*x2_M_1)*p[14] + p[11]*(d*(x2_M_1*x2_M_1*x2_M_1*x2_M_1*x2_M_1) + x2_M_1*(d*d*d*d*d)) + p[12]*(t0*(x2_M_1*x2_M_1*x2_M_1*x2_M_1) + t2*t3) + p[18]*(d*d*d*d*d*d);
 }
 
 double observable(double * x1, double * x2, double * y, double lambda, double eta_a, double eta_b, double alpha, int N, int M){

@@ -1,49 +1,75 @@
 # Project: DoubleHole
 
 SRCDIR = ./Source
+BINDIR = ./Bin
 
-CPP      = g++ -D__DEBUG__
-CC       = gcc.exe -D__DEBUG__
-OBJ      = $(SRCDIR)/main.o $(SRCDIR)/Metropolis.o $(SRCDIR)/Ran2.o $(SRCDIR)/LoadSetup.o $(SRCDIR)/Output.o $(SRCDIR)/SimpleIni/ConvertUTF.o $(SRCDIR)/diffs.o
+
+CPPOBJ      = $(BINDIR)/main.o $(BINDIR)/Metropolis.o $(BINDIR)/Ran2.o $(BINDIR)/LoadSetup.o $(BINDIR)/Output.o $(BINDIR)/SimpleIni/ConvertUTF.o $(BINDIR)/diffs.o
+
+OBJ = $(CPPOBJ) $(COBJ)
+
+BIN      = DoubleHole
 
 INCS     = 
 
-PROGRESS = -DPROGRESS
-VERBOSE = -DVERBOSE
+FLAGS   = $(INCS) -D__DEBUG__
+ifdef $(VERBOSE)
+	FLAGS = $(FLAGS) -DVERBOSE
+endif
+ifdef $(PROGRESS)
+	FLAGS = $(FLAGS) -DPROGRESS
+endif
 
-BIN      = DoubleHole
-FLAGS   = $(INCS) $(PROGRESS) $(VERBOSE)
+CPP= g++
+C = gcc
 
-RM       = rm -f
-CD       = cd
+PYTHON = python3
+JUPYTER = jupyter
 
-.PHONY: all clean
+RM = rm -f
+MV = mv
+RMDIR = $(RM) -r
+MKDIR = mkdir -p
+
+.PHONY: all clean bindir
 
 all: $(BIN)
 
 clean:
-	$(RM) $(OBJ) $(BIN)
+	$(RMDIR) $(BINDIR)
+
+$(BINDIR):
+	$(MKDIR) $(BINDIR)
+	
 
 $(BIN): $(OBJ)
 	$(CPP) $(OBJ) -o $(BIN) $(FLAGS)
 
-$(SRCDIR)/main.o: $(SRCDIR)/main.cpp
-	$(CPP) -c $(SRCDIR)/main.cpp -o $(SRCDIR)/main.o $(FLAGS)
+# compile c and c++ code
 
-$(SRCDIR)/Metropolis.o: $(SRCDIR)/Metropolis.cpp
-	$(CPP) -c $(SRCDIR)/Metropolis.cpp -o $(SRCDIR)/Metropolis.o $(FLAGS)
+$(BINDIR)/%.o: $(SRCDIR)/%.cpp
+	$(MKDIR) $(@D)
+	$(CPP) -c $< -o $@ $(FLAGS)
 
-$(SRCDIR)/Ran2.o: $(SRCDIR)/Ran2.cpp
-	$(CPP) -c $(SRCDIR)/Ran2.cpp -o $(SRCDIR)/Ran2.o $(FLAGS)
+$(BINDIR)/%.o: $(SRCDIR)/%.c
+	$(MKDIR) $(@D)
+	$(CPP) -c $< -o $@ $(FLAGS)
+	
+# convert notebooks to .py
 
-$(SRCDIR)/LoadSetup.o: $(SRCDIR)/LoadSetup.cpp
-	$(CPP) -c $(SRCDIR)/LoadSetup.cpp -o $(SRCDIR)/LoadSetup.o $(FLAGS)
+$(BINDIR)/%.py: %.ipynb
+	$(MKDIR) $(@D)
+	$(JUPYTER) nbconvert --to python $< --output $@
 
-$(SRCDIR)/Output.o: $(SRCDIR)/Output.cpp
-	$(CPP) -c $(SRCDIR)/Output.cpp -o $(SRCDIR)/Output.o $(FLAGS)
+# run notebooks
 
-$(SRCDIR)/SimpleIni/ConvertUTF.o: $(SRCDIR)/SimpleIni/ConvertUTF.c
-	$(CPP) -c $(SRCDIR)/SimpleIni/ConvertUTF.c -o $(SRCDIR)/SimpleIni/ConvertUTF.o $(FLAGS)
+$(SRCDIR)/diffs.c $(SRCDIR)/diffs.h: $(BINDIR)/create_diffs.c.py
+	env PYTHONPYCACHEPREFIX=$(BINDIR) $(PYTHON) $<
+	$(MV) diffs.c $(SRCDIR)/diffs.c
+	$(MV) diffs.h $(SRCDIR)/diffs.h
+	
+	
 
-$(SRCDIR)/diffs.o: $(SRCDIR)/diffs.c
-	$(CPP) -c $(SRCDIR)/diffs.c -o $(SRCDIR)/diffs.o $(FLAGS)
+
+
+
