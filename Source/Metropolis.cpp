@@ -21,23 +21,25 @@ void precalculate(const SimSetup setup, SimValues& values, SimPrecalculated& pre
 	values.eta_b = setup.t / setup.M;
 	//precalculating important factors
 	precalculated = new FACTOR_T[PRECALC_LEN];
-	precalculate(setup.lambda, values.eta_a, values.eta_b, setup.alpha, setup.N, setup.M, precalculated);
+	precalculate(setup.M, setup.N, setup.alpha, values.eta_a, values.eta_b, setup.lambda, precalculated);
 	//setting up dinamic calculated values with null indicator
 	values.accepted = std::numeric_limits<STATS_T>::quiet_NaN();
 	values.accepted_E = std::numeric_limits<STATS_T>::quiet_NaN();
 	values.calc_time =  std::numeric_limits<unsigned int>::max();
 }
 
-/* generate a random initial path */
+/* generate a initial path */
 MetroPath generate_initial(const SimSetup setup){
 	Path path = new CELL_T[(setup.N + 2*setup.M) * setup.samples]; // allocating memory
+	FACTOR_T slope = (setup.second_vertex - setup.first_vertex)/ setup.N;
 	for(int i=0;i<setup.N;i++)
-		path[i] = setup.euclid_path; //the values are renormalized. so 1 is the center of the rigth hole
-	FACTOR_T slope = (setup.outher_vertex - setup.euclid_path) / setup.M;
+		path[i] = setup.first_vertex + slope * i; 
+	slope = (setup.outher_vertex - setup.second_vertex)/ setup.M;
 	for(int i=0;i<setup.M;i++)
-		path[setup.N + i] = setup.euclid_path + slope * i;
+		path[setup.N + i] = setup.second_vertex + slope * i;
+	slope = (setup.first_vertex - setup.outher_vertex)/ setup.M;
 	for(int i=0;i<setup.M;i++)
-		path[setup.N + setup.M + i] = setup.outher_vertex - slope * i;
+		path[setup.N + setup.M + i] = setup.outher_vertex + slope * i;
 	return path;
 }
 
@@ -76,7 +78,6 @@ void step(const Path state, const SimSetup& setup, const SimPrecalculated precal
 	// dereferencing for faster code
 	unsigned int N = setup.N; unsigned int M = setup.M;
 	unsigned int repeats = setup.repeats;
-	FACTOR_T delta_E = setup.delta_E;
 	FACTOR_T delta = setup.delta;
 	// cache space
 	FACTOR_T cache[CACHE_LEN];
@@ -96,17 +97,17 @@ void step(const Path state, const SimSetup& setup, const SimPrecalculated precal
 	// first euclid step
 	cache_diff_y_0(x2[M-1], x2[M-2], y[1], precalculated, cache);
 	for(int i = 0;i<repeats;i++)
-		accepted += local_step<diff_y_0, true>(y+0, cache, precalculated, delta_E);
+		accepted += local_step<diff_y_0, true>(y+0, cache, precalculated, delta);
 	for(pos = y+1;pos<y+N-1;pos++){ // for every site except the first and last
 		// main euclid steps
 		cache_diff_y_j(*(pos - 1), *(pos + 1), precalculated, cache);
 		for(int i = 0;i<repeats;i++)
-			accepted += local_step<diff_y_j, true>(pos, cache, precalculated, delta_E);
+			accepted += local_step<diff_y_j, true>(pos, cache, precalculated, delta);
 	}
 	// last euclid step
 	cache_diff_y_N_1(x1[0], y[N-2], precalculated, cache);
 	for(int i = 0;i<repeats;i++)
-		accepted += local_step<diff_y_N_1, true>(y+N-1, cache, precalculated, delta_E);
+		accepted += local_step<diff_y_N_1, true>(y+N-1, cache, precalculated, delta);
 	
 	values.accepted_E += ((STATS_T)accepted)/(N * repeats);
 	
@@ -148,13 +149,13 @@ void step(const Path state, const SimSetup& setup, const SimPrecalculated precal
 	for(int i = 0;i<repeats;i++)
 		accepted += local_step<diff_x2_0, false>(x2+0, cache, precalculated, delta);
 	// second reverse minkovskian step
-	cache_diff_x2_1(*(pos - 1),*(pos - 2),*(pos + 1),*(pos + 2), precalculated, cache);
+	cache_diff_x2_1(x1[M-1], x2[0], x2[2], x2[3], precalculated, cache);
 	for(int i = 0;i<repeats;i++)
 		accepted += local_step<diff_x2_1, false>(x2+1, cache, precalculated, delta);
 
 	for(pos = x2+2;pos<x2+M-2;pos++){ // for every site except the first and last
 		// main reverse minkovskian steps
-		cache_diff_x2_j(x2[M-4],x2[M-3], x2[M-1], y[0], precalculated, cache);
+		cache_diff_x2_j(*(pos - 1),*(pos - 2),*(pos + 1),*(pos + 2), precalculated, cache);
 		for(int i = 0;i<repeats;i++)
 			accepted += local_step<diff_x2_j, false>(pos, cache, precalculated, delta);
 	}

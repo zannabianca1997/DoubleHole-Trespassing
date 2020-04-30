@@ -17,7 +17,8 @@ BASE_SETUP = """[Physical]
 t = {t_bar}
 T_bar = {T_bar}
 lambda = {lambda}
-euclid_path = {euclid_path}
+first_vertex = {outher_vertex}
+second_vertex = {outher_vertex}
 outher_vertex = {outher_vertex}
 [Simulation]
 SEED = {SEED}
@@ -116,6 +117,8 @@ def get_cost(N,M,num_data, reps):
 def get_N(beta, lambda_, eta_max):
     # N = 1/(beta*eta_0)
     pass
+
+# show functions
 
     
 

@@ -5,6 +5,3 @@
 #define STATS_T  float
 
 #define TIMING_UNITS milliseconds
-
-#define VERBOSE
-#define PROGRESS

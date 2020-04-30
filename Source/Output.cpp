@@ -14,16 +14,6 @@ char* to_char_arr(const std::string val){
 	strcpy(cstr, val.c_str());
 	return cstr;
 }
-std::string to_string(const PathTypes val){
-	switch(val){
-		case PATH_CENTRE:
-			return "CENTRE";
-		case PATH_LEFT:
-			return "LEFT";
-		case PATH_RIGTH:
-			return "RIGTH";
-	}
-}
 
 /* writing to file*/
 void to_file(CSimpleIniA& ini, const SimValues values){
@@ -49,8 +39,9 @@ const std::string pretty_print(const SimSetup setup){
 		<< "\tt=" << setup.t << std::endl
 		<< "\tT_bar=" << setup.T_bar << std::endl 
 		<< "\tlambda=" << setup.lambda << std::endl 
-		<< "\teuclid_path=" << to_string(setup.euclid_path) << std::endl
-		<< "\touther_vertex=" << to_string(setup.outher_vertex) << std::endl
+		<< "\tfirst_vertex=" << setup.first_vertex << std::endl
+		<< "\tsecond_vertex=" << setup.second_vertex << std::endl
+		<< "\touther_vertex=" << setup.outher_vertex << std::endl
 		<< "Simulation parameters" << std::endl 
 		<< "\tSEED=" << setup.SEED << std::endl
 		<< "\tN=" << setup.N << std::endl 
@@ -58,7 +49,6 @@ const std::string pretty_print(const SimSetup setup){
 		<< "\talpha=" << setup.alpha << std::endl 
 		<< "\trepeats=" << setup.repeats << std::endl 
 		<< "\tdelta=" << setup.delta << std::endl 
-		<< "\tdelta_E=" << setup.delta_E << std::endl 
 		<< "\tsamples=" << setup.samples << std::endl
 		<< "\tsamples_spacing=" << setup.samples_spacing << std::endl;
 	return ss.str(); //return a string
