@@ -21,22 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="953deefe-d06c-4a29-906d-aace855b96c7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DoubleHole" beforeDir="false" afterPath="$PROJECT_DIR$/DoubleHole" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/diffs.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/diffs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_diffs.c.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/create_diffs.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/configurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/CodeAssistancePathMapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/Default.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/c_standard_headers_indexer.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/configurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/cpp_standard_headers_indexer.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/launcher.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

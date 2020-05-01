@@ -15,4 +15,7 @@ __pycache__
 *.aux
 *.log
 *.synctex.gz
+
+#builds
 /Build/
+/.ipynb_checkpoints/
