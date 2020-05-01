@@ -1,16 +1,16 @@
 # Project: DoubleHole
 
-SRCDIR = ./Source
-BINDIR = ./Bin
+SRCDIR ?= ./Source
+BUILDDIR ?= ./Build
 
+OBJS = $(BUILDDIR)/main.o $(BUILDDIR)/Metropolis.o $(BUILDDIR)/Ran2.o \
+	$(BUILDDIR)/LoadSetup.o $(BUILDDIR)/Output.o \
+	$(BUILDDIR)/SimpleIni/ConvertUTF.o \
+	$(BUILDDIR)/diffs.o
 
-CPPOBJ      = $(BINDIR)/main.o $(BINDIR)/Metropolis.o $(BINDIR)/Ran2.o $(BINDIR)/LoadSetup.o $(BINDIR)/Output.o $(BINDIR)/SimpleIni/ConvertUTF.o $(BINDIR)/diffs.o
+BIN = DoubleHole
 
-OBJ = $(CPPOBJ) $(COBJ)
-
-BIN      = DoubleHole
-
-INCS     = 
+INCS = -I"$(BUILDDIR)" -I"$(SRCDIR)"
 
 FLAGS   = $(INCS) -D__DEBUG__
 ifdef $(VERBOSE)
@@ -21,55 +21,53 @@ ifdef $(PROGRESS)
 endif
 
 CPP= g++
-C = gcc
+CC = gcc
 
 PYTHON = python3
-JUPYTER = jupyter
+JUPYTERCON = jupyter nbconvert --to python
 
-RM = rm -f
-MV = mv
-RMDIR = $(RM) -r
+CD = cd
+RMDIR = rm -rf
 MKDIR = mkdir -p
 
-.PHONY: all clean bindir
+.PHONY: all clean
 
 all: $(BIN)
 
 clean:
-	$(RMDIR) $(BINDIR)
+	$(RMDIR) $(BUILDDIR)
 
-$(BINDIR):
-	$(MKDIR) $(BINDIR)
-	
+#directories
+$(BUILDDIR):
+	$(MKDIR) $(BUILDDIR)
+$(BUILDDIR)/SimpleIni: | $(BUILDDIR)
+	$(MKDIR) $(BUILDDIR)/SimpleIni
 
-$(BIN): $(OBJ)
-	$(CPP) $(OBJ) -o $(BIN) $(FLAGS)
+#main executable
+$(BIN):  $(OBJS)
+	$(CPP) $(OBJS) -o $(BIN) $(FLAGS)
 
 # compile c and c++ code
+.SECONDEXPANSION:
 
-$(BINDIR)/%.o: $(SRCDIR)/%.cpp
-	$(MKDIR) $(@D)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp | $$(@D)
 	$(CPP) -c $< -o $@ $(FLAGS)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c | $$(@D)
+	$(CC) -c $< -o $@ $(FLAGS)
 
-$(BINDIR)/%.o: $(SRCDIR)/%.c
-	$(MKDIR) $(@D)
-	$(CPP) -c $< -o $@ $(FLAGS)
-	
+$(BUILDDIR)/Metropolis.o: $(SRCDIR)/Metropolis.cpp $(BUILDDIR)/diffs.h
+	$(CPP) -c $(SRCDIR)/Metropolis.cpp -o $(BUILDDIR)/Metropolis.o $(FLAGS)
+
+$(BUILDDIR)/diffs.o: $(BUILDDIR)/diffs.c
+	$(CPP) -c $(BUILDDIR)/diffs.c -o $(BUILDDIR)/diffs.o $(FLAGS)
+
+
 # convert notebooks to .py
 
-$(BINDIR)/%.py: %.ipynb
-	$(MKDIR) $(@D)
-	$(JUPYTER) nbconvert --to python $< --output $@
+$(BUILDDIR)/create_diffs.py:  create_diffs.ipynb | $(BUILDDIR)
+	$(JUPYTERCON) create_diffs.ipynb --output $(BUILDDIR)/create_diffs.py
 
 # run notebooks
 
-$(SRCDIR)/diffs.c $(SRCDIR)/diffs.h: $(BINDIR)/create_diffs.c.py
-	env PYTHONPYCACHEPREFIX=$(BINDIR) $(PYTHON) $<
-	$(MV) diffs.c $(SRCDIR)/diffs.c
-	$(MV) diffs.h $(SRCDIR)/diffs.h
-	
-	
-
-
-
-
+$(BUILDDIR)/diffs.c $(BUILDDIR)/diffs.h: $(BUILDDIR)/create_diffs.py
+	( $(CD) $(BUILDDIR) && $(PYTHON) create_diffs.py > create_diffs.log )

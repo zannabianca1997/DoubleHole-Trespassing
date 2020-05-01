@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="953deefe-d06c-4a29-906d-aace855b96c7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DoubleHole-Trespassing.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DoubleHole-Trespassing.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DoubleHole.dev" beforeDir="false" afterPath="$PROJECT_DIR$/DoubleHole.dev" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DoubleHole.layout" beforeDir="false" afterPath="$PROJECT_DIR$/DoubleHole.layout" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile.win" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile.win" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/P_wkb.py" beforeDir="false" afterPath="$PROJECT_DIR$/P_wkb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sims/Test1.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Sims/Test1.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CONST.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CONST.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LoadSetup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LoadSetup.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/LoadSetup.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/LoadSetup.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Metropolis.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Metropolis.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Metropolis.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Metropolis.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Output.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Output.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Output.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Output.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Ran2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Ran2.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Ran2.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Ran2.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/diffs.c" beforeDir="false" afterPath="$PROJECT_DIR$/Source/diffs.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/diffs.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/diffs.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/libnpy/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Source/libnpy/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/libnpy/npy.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/libnpy/npy.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/simpleini/ConvertUTF.c" beforeDir="false" afterPath="$PROJECT_DIR$/Source/simpleini/ConvertUTF.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/simpleini/ConvertUTF.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/simpleini/ConvertUTF.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/simpleini/LICENCE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Source/simpleini/LICENCE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/simpleini/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Source/simpleini/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/simpleini/SimpleIni.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/simpleini/SimpleIni.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/simpleini/ini.syn" beforeDir="false" afterPath="$PROJECT_DIR$/Source/simpleini/ini.syn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/change_serie_params.py" beforeDir="false" afterPath="$PROJECT_DIR$/change_serie_params.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_serie.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_serie.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delta_correction.py" beforeDir="false" afterPath="$PROJECT_DIR$/delta_correction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/do_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/do_all.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report.tex" beforeDir="false" afterPath="$PROJECT_DIR$/report.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serie_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/serie_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DoubleHole" beforeDir="false" afterPath="$PROJECT_DIR$/DoubleHole" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/diffs.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/diffs.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_diffs.c.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/create_diffs.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/configurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/CodeAssistancePathMapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/Default.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/c_standard_headers_indexer.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/configurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/cpp_standard_headers_indexer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/launcher.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,72 +54,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1b8FY61n5NkK7N0Yxydu7nuGW1i" />
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DoubleHole-Trespassing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DoubleHole-Trespassing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DoubleHole-Trespassing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DoubleHole-Trespassing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DoubleHole-Trespassing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DoubleHole-Trespassing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sims" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/programmazione/python/localenv/python.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Makefile" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.do_all">
+  <component name="RunManager" selected="Makefile.make all">
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="" />
@@ -133,6 +74,18 @@
       <module name="" />
       <envs />
       <method />
+    </configuration>
+    <configuration name="make all" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="all" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <configuration name="make clean" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="clean" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
     </configuration>
     <configuration name="P_wkb" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DoubleHole-Trespassing" />
@@ -218,6 +171,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="ShConfigurationType">
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/Makefile" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/make" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unittests in P_wkb.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="DoubleHole-Trespassing" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -247,6 +211,8 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Makefile.make clean" />
+      <item itemvalue="Makefile.make all" />
       <item itemvalue="Python.do_all" />
       <item itemvalue="Python.Test1" />
       <item itemvalue="Python.delta_correction" />
@@ -255,6 +221,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Makefile.make all" />
         <item itemvalue="Python.Test1" />
         <item itemvalue="Python.delta_correction" />
         <item itemvalue="Python.P_wkb" />
@@ -283,20 +250,54 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="TestHistory">
-    <history-entry file="Unittests_in_test_P_wkb_py - 2020.04.06 at 11h 42m 56s.xml">
-      <configuration name="Unittests in test_P_wkb.py" configurationId="tests" />
-    </history-entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Completed trespassing simulator&#10;-Added sympy generated diffs formulae&#10;-Changed the code to simulate the three paths loop" />
     <option name="LAST_COMMIT_MESSAGE" value="Completed trespassing simulator&#10;-Added sympy generated diffs formulae&#10;-Changed the code to simulate the three paths loop" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="184" width="1016" height="742" key="SettingsEditor" timestamp="1588009398914">
+    <state x="458" y="152" width="1259" height="668" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588320260861">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="488" y="184" width="1016" height="742" key="SettingsEditor/72.27.1848.1053@72.27.1848.1053" timestamp="1588009398914" />
+    <state x="458" y="152" width="1259" height="668" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1588320260861" />
+    <state x="660" y="274" width="668" height="561" key="#make_all" timestamp="1588278682609">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="660" y="274" width="668" height="561" key="#make_all/72.27.1848.1053@72.27.1848.1053" timestamp="1588278682609" />
+    <state x="782" y="292" width="424" height="496" key="FileChooserDialogImpl" timestamp="1588279534432">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="782" y="292" width="424" height="496" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1588279534432" />
+    <state width="1802" height="272" key="GridCell.Tab.0.bottom" timestamp="1588321635429">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1802" height="272" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1588321635429" />
+    <state width="1802" height="272" key="GridCell.Tab.0.center" timestamp="1588321635428">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1802" height="272" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1588321635428" />
+    <state width="1802" height="272" key="GridCell.Tab.0.left" timestamp="1588321635428">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1802" height="272" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1588321635428" />
+    <state width="1802" height="272" key="GridCell.Tab.0.right" timestamp="1588321635429">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1802" height="272" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1588321635429" />
+    <state x="488" y="179" width="1016" height="742" key="SettingsEditor" timestamp="1588277976794">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="488" y="179" width="1016" height="742" key="SettingsEditor/72.27.1848.1053@72.27.1848.1053" timestamp="1588277976794" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
